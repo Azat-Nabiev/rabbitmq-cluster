@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  rabbitmq1:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "mysecretcookie"
+      RABBITMQ_USE_LONGNAME: "true"
+    hostname: rabbitmq1.local
+    networks:
+      rabbitmq_cluster:
+        aliases:
+          - rabbitmq.local
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  rabbitmq2:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "mysecretcookie"
+      RABBITMQ_USE_LONGNAME: "true"
+    hostname: rabbitmq2.local
+    networks:
+      rabbitmq_cluster:
+        aliases:
+          - rabbitmq.local
+    ports:
+      - "15673:15672"
+      - "5673:5672"
+
+  rabbitmq3:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "mysecretcookie"
+      RABBITMQ_USE_LONGNAME: "true"
+    hostname: rabbitmq3.local
+    networks:
+      rabbitmq_cluster:
+        aliases:
+          - rabbitmq.local
+    ports:
+      - "15674:15672"
+      - "5674:5672"
+
+networks:
+  rabbitmq_cluster:
+    driver: bridge
+
